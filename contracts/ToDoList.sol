@@ -18,6 +18,11 @@ contract ToDoList {
         bool completed
     );
 
+    event TaskCompleted(
+        uint id,
+        bool completed
+    );
+
     constructor () public {
         createTask("Push in GitHub");
     }
@@ -28,4 +33,10 @@ contract ToDoList {
         emit TaskCreated(taskCount, _content, false);
     }
 
+    function toggleCompleted(uint _id) public {
+        Task memory _task = tasks[_id];
+        _task.completed = !_task.completed;
+        tasks[_id] = _task;
+        emit TaskCompleted(_id, _task.completed);
+    }
 }
