@@ -73,6 +73,8 @@ App = {
     // Update loading state
     App.setLoading(false)
   },
+
+
   renderTasks: async () => {
     // Load the total task count from the blockchain
     const taskCount = await App.todoList.taskCount()
@@ -104,6 +106,13 @@ App = {
       // Show the task
       $newTaskTemplate.show()
     }
+  },
+
+  createTask: async () => {
+    App.setLoading(true)
+    const content = $('#newTask').val()
+    await App.todoList.createTask(content)
+    window.location.reload()
   },
 
   setLoading: (boolean) => {

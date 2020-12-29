@@ -12,6 +12,12 @@ contract ToDoList {
 
     mapping (uint=> Task) public tasks;
 
+    event TaskCreated(
+        uint id,
+        string content,
+        bool completed
+    );
+
     constructor () public {
         createTask("Push in GitHub");
     }
@@ -19,6 +25,7 @@ contract ToDoList {
     function createTask(string memory _content) public {
         taskCount ++;
         tasks[taskCount] = Task(taskCount, _content, false);
+        emit TaskCreated(taskCount, _content, false);
     }
 
 }
